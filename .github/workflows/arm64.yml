@@ -1,4 +1,4 @@
-name: ARM64 Pull and Save NVIDIA Docker Image
+name: ARM64 Pull and Save Docker Image
 
 on:
   workflow_dispatch:
@@ -6,7 +6,7 @@ on:
       docker_images:
         description: '请填写docker镜像名称 多个用英文逗号分开'
         required: true
-        default: 'nvidia/cuda:latest'  # 设置默认的 NVIDIA Docker 镜像
+        default: 'alpine:latest,ubuntu:latest'  # 设置默认的 Docker 镜像列表
 
 jobs:
   pull_and_package:
@@ -20,8 +20,8 @@ jobs:
       uses: docker/login-action@v3
       with:
         registry: nvcr.io  # NVIDIA Container Registry
-        username: ${{ secrets.13675979994@163.com }}  # 使用 GitHub Secrets 存储 NVIDIA 用户名
-        password: ${{ secrets.bzhlazF1amZtZnVrbzJ0bGMzaTFkZTJ0M2s6OTYyMWEyZWEtNTk3Ni00NTQwLWJmNjktN2JlNmYzNjExN2U5 }}  # 使用 GitHub Secrets 存储 NVIDIA 密码
+        username: ${{ secrets.NVIDIA_USERNAME }}  # 使用 GitHub Secrets 存储 NVIDIA 用户名
+        password: ${{ secrets.NVIDIA_PASSWORD }}  # 使用 GitHub Secrets 存储 NVIDIA 密码
 
     - name: Pull Docker Images and Package
       run: |
